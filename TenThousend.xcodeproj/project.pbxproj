@@ -1,0 +1,547 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		43A08A012009F6D600D03C08 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A089F32009F6D600D03C08 /* GameEngine.swift */; };
+		43A08A022009F6D600D03C08 /* GameObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A089F42009F6D600D03C08 /* GameObserver.swift */; };
+		43A08A032009F6D600D03C08 /* PlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A089F52009F6D600D03C08 /* PlayerManager.swift */; };
+		43A08A052009F6D600D03C08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43A089F82009F6D600D03C08 /* LaunchScreen.storyboard */; };
+		43A08A062009F6D600D03C08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43A089FA2009F6D600D03C08 /* Main.storyboard */; };
+		43A08A072009F6D600D03C08 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43A089FC2009F6D600D03C08 /* Info.plist */; };
+		43A08A082009F6D600D03C08 /* CurrentGameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A089FE2009F6D600D03C08 /* CurrentGameData.swift */; };
+		43A08A092009F6D600D03C08 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A089FF2009F6D600D03C08 /* Game.swift */; };
+		43A08A0A2009F6D600D03C08 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A08A002009F6D600D03C08 /* Player.swift */; };
+		43A08A0F2009F77C00D03C08 /* TenThousendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A08A0E2009F77C00D03C08 /* TenThousendTests.swift */; };
+		43A08A142009F8C000D03C08 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A08A132009F8C000D03C08 /* GameEngineTests.swift */; };
+		43A08A1C2009F92B00D03C08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A08A152009F92B00D03C08 /* AppDelegate.swift */; };
+		43A08A1D2009F92B00D03C08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43A08A172009F92B00D03C08 /* LaunchScreen.storyboard */; };
+		43A08A1E2009F92B00D03C08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43A08A192009F92B00D03C08 /* Main.storyboard */; };
+		43A08A1F2009F92B00D03C08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43A08A1B2009F92B00D03C08 /* Assets.xcassets */; };
+		43A08A21200A024400D03C08 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43A08A20200A024400D03C08 /* Default-568h@2x.png */; };
+		43B8A20B2007CFDD0060821C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B8A20A2007CFDD0060821C /* ViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		43B8A21A2007CFDD0060821C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43B8A1FD2007CFDD0060821C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43B8A2042007CFDD0060821C;
+			remoteInfo = TenThousend;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		43A089F32009F6D600D03C08 /* GameEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
+		43A089F42009F6D600D03C08 /* GameObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameObserver.swift; sourceTree = "<group>"; };
+		43A089F52009F6D600D03C08 /* PlayerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerManager.swift; sourceTree = "<group>"; };
+		43A089F92009F6D600D03C08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		43A089FB2009F6D600D03C08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		43A089FC2009F6D600D03C08 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43A089FE2009F6D600D03C08 /* CurrentGameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentGameData.swift; sourceTree = "<group>"; };
+		43A089FF2009F6D600D03C08 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		43A08A002009F6D600D03C08 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		43A08A0E2009F77C00D03C08 /* TenThousendTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenThousendTests.swift; sourceTree = "<group>"; };
+		43A08A132009F8C000D03C08 /* GameEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
+		43A08A152009F92B00D03C08 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		43A08A182009F92B00D03C08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		43A08A1A2009F92B00D03C08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		43A08A1B2009F92B00D03C08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		43A08A20200A024400D03C08 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		43B8A2052007CFDD0060821C /* TenThousend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TenThousend.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		43B8A20A2007CFDD0060821C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		43B8A2192007CFDD0060821C /* TenThousendTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TenThousendTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		43B8A21F2007CFDD0060821C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		43B8A2022007CFDD0060821C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43B8A2162007CFDD0060821C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		43A089F22009F6D600D03C08 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				43A089F32009F6D600D03C08 /* GameEngine.swift */,
+				43A089F42009F6D600D03C08 /* GameObserver.swift */,
+				43A089F52009F6D600D03C08 /* PlayerManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		43A089F62009F6D600D03C08 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				43A08A152009F92B00D03C08 /* AppDelegate.swift */,
+				43A08A1B2009F92B00D03C08 /* Assets.xcassets */,
+				43A08A162009F92B00D03C08 /* Base.lproj */,
+				43A089F82009F6D600D03C08 /* LaunchScreen.storyboard */,
+				43A089FA2009F6D600D03C08 /* Main.storyboard */,
+				43A089FC2009F6D600D03C08 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		43A089FD2009F6D600D03C08 /* DataObjects */ = {
+			isa = PBXGroup;
+			children = (
+				43A089FE2009F6D600D03C08 /* CurrentGameData.swift */,
+				43A089FF2009F6D600D03C08 /* Game.swift */,
+				43A08A002009F6D600D03C08 /* Player.swift */,
+			);
+			path = DataObjects;
+			sourceTree = "<group>";
+		};
+		43A08A122009F8C000D03C08 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				43A08A132009F8C000D03C08 /* GameEngineTests.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		43A08A162009F92B00D03C08 /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				43A08A172009F92B00D03C08 /* LaunchScreen.storyboard */,
+				43A08A192009F92B00D03C08 /* Main.storyboard */,
+			);
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		43B8A1FC2007CFDD0060821C = {
+			isa = PBXGroup;
+			children = (
+				43A08A20200A024400D03C08 /* Default-568h@2x.png */,
+				43B8A2072007CFDD0060821C /* TenThousend */,
+				43B8A21C2007CFDD0060821C /* TenThousendTests */,
+				43B8A2062007CFDD0060821C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		43B8A2062007CFDD0060821C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				43B8A2052007CFDD0060821C /* TenThousend.app */,
+				43B8A2192007CFDD0060821C /* TenThousendTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		43B8A2072007CFDD0060821C /* TenThousend */ = {
+			isa = PBXGroup;
+			children = (
+				43A089FD2009F6D600D03C08 /* DataObjects */,
+				43A089F22009F6D600D03C08 /* Model */,
+				43A089F62009F6D600D03C08 /* SupportingFiles */,
+				43B8A20A2007CFDD0060821C /* ViewController.swift */,
+			);
+			path = TenThousend;
+			sourceTree = "<group>";
+		};
+		43B8A21C2007CFDD0060821C /* TenThousendTests */ = {
+			isa = PBXGroup;
+			children = (
+				43A08A0E2009F77C00D03C08 /* TenThousendTests.swift */,
+				43A08A122009F8C000D03C08 /* Model */,
+				43B8A21F2007CFDD0060821C /* Info.plist */,
+			);
+			path = TenThousendTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		43B8A2042007CFDD0060821C /* TenThousend */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43B8A2222007CFDD0060821C /* Build configuration list for PBXNativeTarget "TenThousend" */;
+			buildPhases = (
+				43B8A2012007CFDD0060821C /* Sources */,
+				43B8A2022007CFDD0060821C /* Frameworks */,
+				43B8A2032007CFDD0060821C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TenThousend;
+			productName = TenThousend;
+			productReference = 43B8A2052007CFDD0060821C /* TenThousend.app */;
+			productType = "com.apple.product-type.application";
+		};
+		43B8A2182007CFDD0060821C /* TenThousendTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43B8A2252007CFDD0060821C /* Build configuration list for PBXNativeTarget "TenThousendTests" */;
+			buildPhases = (
+				43B8A2152007CFDD0060821C /* Sources */,
+				43B8A2162007CFDD0060821C /* Frameworks */,
+				43B8A2172007CFDD0060821C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				43B8A21B2007CFDD0060821C /* PBXTargetDependency */,
+			);
+			name = TenThousendTests;
+			productName = TenThousendTests;
+			productReference = 43B8A2192007CFDD0060821C /* TenThousendTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		43B8A1FD2007CFDD0060821C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = YasLin;
+				TargetAttributes = {
+					43B8A2042007CFDD0060821C = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					43B8A2182007CFDD0060821C = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 43B8A2042007CFDD0060821C;
+					};
+				};
+			};
+			buildConfigurationList = 43B8A2002007CFDD0060821C /* Build configuration list for PBXProject "TenThousend" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 43B8A1FC2007CFDD0060821C;
+			productRefGroup = 43B8A2062007CFDD0060821C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				43B8A2042007CFDD0060821C /* TenThousend */,
+				43B8A2182007CFDD0060821C /* TenThousendTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		43B8A2032007CFDD0060821C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43A08A062009F6D600D03C08 /* Main.storyboard in Resources */,
+				43A08A052009F6D600D03C08 /* LaunchScreen.storyboard in Resources */,
+				43A08A1E2009F92B00D03C08 /* Main.storyboard in Resources */,
+				43A08A1F2009F92B00D03C08 /* Assets.xcassets in Resources */,
+				43A08A1D2009F92B00D03C08 /* LaunchScreen.storyboard in Resources */,
+				43A08A21200A024400D03C08 /* Default-568h@2x.png in Resources */,
+				43A08A072009F6D600D03C08 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43B8A2172007CFDD0060821C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		43B8A2012007CFDD0060821C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43A08A1C2009F92B00D03C08 /* AppDelegate.swift in Sources */,
+				43B8A20B2007CFDD0060821C /* ViewController.swift in Sources */,
+				43A08A092009F6D600D03C08 /* Game.swift in Sources */,
+				43A08A022009F6D600D03C08 /* GameObserver.swift in Sources */,
+				43A08A082009F6D600D03C08 /* CurrentGameData.swift in Sources */,
+				43A08A0A2009F6D600D03C08 /* Player.swift in Sources */,
+				43A08A032009F6D600D03C08 /* PlayerManager.swift in Sources */,
+				43A08A012009F6D600D03C08 /* GameEngine.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43B8A2152007CFDD0060821C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43A08A0F2009F77C00D03C08 /* TenThousendTests.swift in Sources */,
+				43A08A142009F8C000D03C08 /* GameEngineTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		43B8A21B2007CFDD0060821C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43B8A2042007CFDD0060821C /* TenThousend */;
+			targetProxy = 43B8A21A2007CFDD0060821C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		43A089F82009F6D600D03C08 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43A089F92009F6D600D03C08 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		43A089FA2009F6D600D03C08 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43A089FB2009F6D600D03C08 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		43A08A172009F92B00D03C08 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43A08A182009F92B00D03C08 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		43A08A192009F92B00D03C08 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43A08A1A2009F92B00D03C08 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		43B8A2202007CFDD0060821C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		43B8A2212007CFDD0060821C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		43B8A2232007CFDD0060821C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 323C6YSC25;
+				INFOPLIST_FILE = TenThousend/SupportingFiles/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lindaccnordstrom.TenThousend;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		43B8A2242007CFDD0060821C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 323C6YSC25;
+				INFOPLIST_FILE = TenThousend/SupportingFiles/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lindaccnordstrom.TenThousend;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		43B8A2262007CFDD0060821C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 323C6YSC25;
+				INFOPLIST_FILE = TenThousendTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lindaccnordstrom.TenThousendTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TenThousend.app/TenThousend";
+			};
+			name = Debug;
+		};
+		43B8A2272007CFDD0060821C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 323C6YSC25;
+				INFOPLIST_FILE = TenThousendTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lindaccnordstrom.TenThousendTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TenThousend.app/TenThousend";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		43B8A2002007CFDD0060821C /* Build configuration list for PBXProject "TenThousend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43B8A2202007CFDD0060821C /* Debug */,
+				43B8A2212007CFDD0060821C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		43B8A2222007CFDD0060821C /* Build configuration list for PBXNativeTarget "TenThousend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43B8A2232007CFDD0060821C /* Debug */,
+				43B8A2242007CFDD0060821C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		43B8A2252007CFDD0060821C /* Build configuration list for PBXNativeTarget "TenThousendTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43B8A2262007CFDD0060821C /* Debug */,
+				43B8A2272007CFDD0060821C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 43B8A1FD2007CFDD0060821C /* Project object */;
+}
