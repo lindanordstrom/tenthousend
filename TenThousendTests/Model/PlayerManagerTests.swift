@@ -74,17 +74,42 @@ class PlayerManagerTests: XCTestCase {
      */
     func testUpdatePlayer() {
         let expectedPlayer1 = Player(id: 1, name: "Linda", avatar: Data(capacity: 1))
-        var expectedPlayer2 = Player(id: 2, name: "Yaser", avatar: Data(capacity: 1))
+        let expectedPlayer2 = Player(id: 2, name: "Yaser", avatar: Data(capacity: 1))
         let expectedPlayerList = [expectedPlayer1, expectedPlayer2]
         dataStore.value = expectedPlayerList
 
-        testObject.updatePlayer(expectedPlayer1, name: "Linda is awesome", avatar: Data(capacity: 2))
-        expectedPlayer2 = Player(id: 2, name: "Linda is awesome", avatar: Data(capacity: 2))
+        expectedPlayer1.name = "Linda is Awesome"
+        expectedPlayer1.bestTurn = 5000
+        expectedPlayer1.currentGameData = CurrentGameData(totalScore: 100, turns: 1, lastTurnScore: 100)
+
+        guard let _ = try? testObject.updatePlayer(expectedPlayer1) else {
+            XCTFail("Error thrown")
+            return
+        }
 
         XCTAssertTrue(dataStore.objectForKeyCalled)
         XCTAssertTrue(dataStore.setValueForKeyCalled)
         XCTAssertEqual(dataStore.key, "Players")
         XCTAssertEqual(dataStore.value as! [Player], expectedPlayerList)
+    }
+
+    /**
+     *  Given: Previous players exists in storage
+     *  When: A non existing player is updated
+     *  Then: The update function throws an error
+     */
+    func testUpdateNonExistingPlayer() {
+        let expectedPlayer1 = Player(id: 1, name: "Linda", avatar: Data(capacity: 1))
+        let expectedPlayer2 = Player(id: 2, name: "Yaser", avatar: Data(capacity: 1))
+        let expectedPlayerList = [expectedPlayer1, expectedPlayer2]
+        dataStore.value = expectedPlayerList
+
+        XCTAssertThrowsError(try testObject.updatePlayer(Player(id: 3, name: "Pixel", avatar: Data(capacity: 1)))) { (error) in
+            XCTAssertEqual(error as? PlayerError, PlayerError.nonExistingPlayer)
+        }
+
+        XCTAssertTrue(dataStore.objectForKeyCalled)
+        XCTAssertFalse(dataStore.setValueForKeyCalled)
     }
 
     /**
@@ -131,7 +156,11 @@ class PlayerManagerTests: XCTestCase {
         var expectedPlayerList = [expectedPlayer1, expectedPlayer2]
         dataStore.value = expectedPlayerList
 
-        testObject.removePlayer(expectedPlayer1)
+        guard let _ = try? testObject.removePlayer(expectedPlayer1) else {
+            XCTFail("Error thrown")
+            return
+        }
+
         expectedPlayerList.remove(at: 0)
 
         XCTAssertTrue(dataStore.objectForKeyCalled)
@@ -148,7 +177,32 @@ class PlayerManagerTests: XCTestCase {
      */
     func testRemovePlayerWhenNoPlayersExists() {
         let expectedPlayer1 = Player(id: 1, name: "Linda", avatar: Data(capacity: 1))
-        testObject.removePlayer(expectedPlayer1)
+
+        guard let _ = try? testObject.removePlayer(expectedPlayer1) else {
+            XCTFail("Error thrown")
+            return
+        }
+
+        XCTAssertTrue(dataStore.objectForKeyCalled)
+        XCTAssertFalse(dataStore.setValueForKeyCalled)
+    }
+
+    /**
+     *  Given: Previous players exists in storage
+     *  When: A non existing player is removed
+     *  Then: Set value for Key should not be called
+     *  And: An error should be thrown
+     *  And: Nothing else should happen (no crash, no update)
+     */
+    func testRemoveNonExistingPlayer() {
+        let expectedPlayer1 = Player(id: 1, name: "Linda", avatar: Data(capacity: 1))
+        let expectedPlayer2 = Player(id: 2, name: "Yaser", avatar: Data(capacity: 1))
+        let expectedPlayerList = [expectedPlayer1, expectedPlayer2]
+        dataStore.value = expectedPlayerList
+
+        XCTAssertThrowsError(try testObject.removePlayer(Player(id: 3, name: "Pixel", avatar: Data(capacity: 1)))) { (error) in
+            XCTAssertEqual(error as? PlayerError, PlayerError.nonExistingPlayer)
+        }
 
         XCTAssertTrue(dataStore.objectForKeyCalled)
         XCTAssertFalse(dataStore.setValueForKeyCalled)

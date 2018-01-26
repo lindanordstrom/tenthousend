@@ -10,16 +10,23 @@ import Foundation
 
 protocol PlayerManager {
     func addPlayer(name: String, avatar: Data)
-    func updatePlayer(_: Player, name: String, avatar: Data)
+    func updatePlayer(_: Player) throws
     func getAllPlayers() -> [Player]
-    func removePlayer(_: Player)
+    func removePlayer(_: Player) throws
+}
+
+enum PlayerError: Error {
+    case nonExistingPlayer
 }
 
 class DicePlayerManager: PlayerManager {
 
     let dataStore: DataStore
 
-    init(dataStore: DataStore = UserDefaults.standard) {
+    convenience init() {
+        self.init(dataStore: UserDefaults.standard)
+    }
+    init(dataStore: DataStore) {
         self.dataStore = dataStore
     }
 
@@ -27,15 +34,15 @@ class DicePlayerManager: PlayerManager {
 
     }
 
-    func updatePlayer(_: Player, name: String, avatar: Data) {
-
+    func updatePlayer(_: Player) throws {
+        throw PlayerError.nonExistingPlayer
     }
 
     func getAllPlayers() -> [Player] {
         return []
     }
 
-    func removePlayer(_: Player) {
-
+    func removePlayer(_: Player) throws {
+        throw PlayerError.nonExistingPlayer
     }
 }
