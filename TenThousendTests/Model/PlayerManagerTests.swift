@@ -178,9 +178,8 @@ class PlayerManagerTests: XCTestCase {
     func testRemovePlayerWhenNoPlayersExists() {
         let expectedPlayer1 = Player(id: 1, name: "Linda", avatar: Data(capacity: 1))
 
-        guard let _ = try? testObject.removePlayer(expectedPlayer1) else {
-            XCTFail("Error thrown")
-            return
+        XCTAssertThrowsError(try testObject.removePlayer(expectedPlayer1)) { (error) in
+            XCTAssertEqual(error as? PlayerError, PlayerError.emptyPlayerList)
         }
 
         XCTAssertTrue(dataStore.objectForKeyCalled)

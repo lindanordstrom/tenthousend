@@ -30,6 +30,8 @@ extension Player: Equatable {
             lhs.id == rhs.id &&
                 lhs.name == rhs.name &&
                 lhs.avatar == rhs.avatar &&
-                lhs.currentGameData == rhs.currentGameData
+                lhs.currentGameData == rhs.currentGameData &&
+                lhs.bestTurn == rhs.bestTurn &&
+                lhs.quickestVictory == rhs.quickestVictory
     }
 }
