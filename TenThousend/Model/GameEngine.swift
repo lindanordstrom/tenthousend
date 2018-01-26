@@ -17,13 +17,20 @@ protocol GameEngine {
     func remove(observer: GameObserver)
 }
 
+private struct GameEngineStrings {
+    static let gamesKey = "Games"
+}
 
 class DiceGameEngine: GameEngine {
     private var currentGame: Game?
     private var gameObservers: [GameObserver] = []
     private let dataStore: DataStore
 
-    init(dataStore: DataStore = UserDefaults.standard) {
+    convenience init() {
+        self.init(dataStore: UserDefaults.standard)
+    }
+
+    init(dataStore: DataStore) {
         self.dataStore = dataStore
     }
 
@@ -33,6 +40,13 @@ class DiceGameEngine: GameEngine {
             else { return false }
 
         currentGame = Game(id: 1, date: NSDate(), target: 10000, participants: players, gameStatus: .ongoing)
+
+        if let game = currentGame {
+            var allGames = getAllGames()
+            allGames.append(game)
+            dataStore.setValue(allGames, forKey: GameEngineStrings.gamesKey)
+        }
+
         updateGameObservers()
         return true
     }
@@ -61,7 +75,10 @@ class DiceGameEngine: GameEngine {
     }
 
     func getAllGames() -> [Game] {
-        return []
+        guard let games = dataStore.object(forKey: GameEngineStrings.gamesKey) as? [Game] else {
+            return []
+        }
+        return games
     }
 
     func add(observer: GameObserver) {
@@ -75,7 +92,9 @@ class DiceGameEngine: GameEngine {
 
     private func playerDidWin() -> Bool {
         guard let game = currentGame,
-            let totalScore = game.activePlayer?.currentGameData.totalScore else { return false }
+            let totalScore = game.activePlayer?.currentGameData.totalScore else {
+                return false
+        }
         return totalScore >= game.target
     }
 
@@ -84,7 +103,9 @@ class DiceGameEngine: GameEngine {
             let activePlayer = game.activePlayer,
             game.gameStatus == .ongoing else { return }
 
-        if let i = game.participants.index(where: { $0 == activePlayer })?.hashValue {
+        let matchingIndex = game.participants.index(where: { $0.id == activePlayer.id })
+        
+        if let i = matchingIndex {
             let nextIndex = i + 1 >= game.participants.count ? 0 : i + 1
             currentGame?.activePlayer = currentGame?.participants[nextIndex]
         }

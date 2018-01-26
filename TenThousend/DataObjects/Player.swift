@@ -9,29 +9,17 @@
 import Foundation
 
 class Player {
-    let id: Int
+    let id: String
     var name: String
     var avatar: Data
     var currentGameData: CurrentGameData
     var bestTurn: Int?
     var quickestVictory: Int?
 
-    init(id: Int, name: String, avatar: Data) {
+    init(id: String, name: String, avatar: Data) {
         self.id = id
         self.name = name
         self.avatar = avatar
         self.currentGameData = CurrentGameData()
-    }
-}
-
-extension Player: Equatable {
-    public static func == (lhs: Player, rhs: Player) -> Bool {
-        return
-            lhs.id == rhs.id &&
-                lhs.name == rhs.name &&
-                lhs.avatar == rhs.avatar &&
-                lhs.currentGameData == rhs.currentGameData &&
-                lhs.bestTurn == rhs.bestTurn &&
-                lhs.quickestVictory == rhs.quickestVictory
     }
 }

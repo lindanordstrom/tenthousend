@@ -14,14 +14,16 @@ class GameEngineTests: XCTestCase {
 
     private var testObject: DiceGameEngine!
     private var testObserver: TestObserver!
-    private var testPlayers = [Player(id: 01, name: "Linda", avatar: Data(capacity: 1)), Player(id: 02, name: "Yaser", avatar: Data(capacity: 1))]
-    private var expectedPlayer1 = Player(id: 01, name: "Linda", avatar: Data(capacity: 1))
-    private var expectedPlayer2 = Player(id: 02, name: "Yaser", avatar: Data(capacity: 1))
+    private var dataStore: TestUserDefaults!
+    private var testPlayers = [Player(id: "a", name: "Linda", avatar: Data(capacity: 1)), Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))]
+    private var expectedPlayer1 = Player(id: "a", name: "Linda", avatar: Data(capacity: 1))
+    private var expectedPlayer2 = Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))
 
     override func setUp() {
         super.setUp()
 
-        testObject = DiceGameEngine()
+        dataStore = TestUserDefaults()
+        testObject = DiceGameEngine(dataStore: dataStore)
         testObserver = TestObserver()
         testObject?.add(observer: testObserver)
     }
@@ -30,6 +32,7 @@ class GameEngineTests: XCTestCase {
         testObject.remove(observer: testObserver)
         testObject = nil
         testObserver = nil
+        dataStore = nil
 
         super.tearDown()
     }
@@ -52,6 +55,7 @@ class GameEngineTests: XCTestCase {
      *  Then:   A game should be started
      *  And:    The function should return true
      *  And:    The Game object should be updated with correct data
+     *  And:    The new game is saved in the data storage
      */
     func testStartGame() {
         let startedGameResult = testObject.startGame(players: testPlayers)
@@ -63,6 +67,9 @@ class GameEngineTests: XCTestCase {
         XCTAssert(startedGameResult == true)
         XCTAssertNotNil(testObserver.updatedGame)
         assertGamesAreEqual(testGame: testObserver.updatedGame, expectedGame: expectedGame)
+        XCTAssertEqual(dataStore.key, "Games")
+        XCTAssertTrue(dataStore.setValueForKeyCalled)
+        assertGamesAreEqual(testGame: (dataStore.value as? [Game])?.first, expectedGame: expectedGame)
     }
 
     /**
@@ -240,6 +247,42 @@ class GameEngineTests: XCTestCase {
 
         XCTAssertFalse(testObserver.updateCalled)
         XCTAssert(testObserver?.updatedGame?.gameStatus == .completed)
+    }
+
+    /**
+     *  Given: Previous players exists in storage
+     *  When: Getting all players
+     *  Then: A list of all players is returned
+     */
+    func testGetAllGames() {
+        let expectedGame1 = Game(id: 01, date: NSDate(), target: 10000, participants: testPlayers, gameStatus: .completed)
+        let expectedGame2 = Game(id: 02, date: NSDate(), target: 20000, participants: testPlayers, gameStatus: .cancelled)
+        let expectedGame3 = Game(id: 03, date: NSDate(), target: 10000, participants: testPlayers, gameStatus: .ongoing)
+
+        let expectedGameList = [expectedGame1, expectedGame2, expectedGame3]
+        dataStore.value = expectedGameList
+
+        let result = testObject.getAllGames()
+
+        XCTAssertTrue(dataStore.objectForKeyCalled)
+        XCTAssertEqual(dataStore.key, "Games")
+        assertGamesAreEqual(testGame: result[0], expectedGame: expectedGame1)
+        assertGamesAreEqual(testGame: result[1], expectedGame: expectedGame2)
+        assertGamesAreEqual(testGame: result[2], expectedGame: expectedGame3)
+
+    }
+
+    /**
+     *  Given: No games exists in storage
+     *  When: Getting all games
+     *  Then: An empty list is returned
+     */
+    func testGetAllGamesWhenNoGamesExists() {
+        let result = testObject.getAllGames()
+
+        XCTAssertTrue(dataStore.objectForKeyCalled)
+        XCTAssertEqual(dataStore.key, "Games")
+        XCTAssertTrue(result.isEmpty)
     }
 
     /**

@@ -13,16 +13,19 @@ import XCTest
 class PlayerManagerTests: XCTestCase {
 
     private var testObject: DicePlayerManager!
-    private var dataStore: PlayerManagerTestUserDefaults!
+    private var dataStore: TestUserDefaults!
+    private var uniqueIdentifier: PlayerManagerTestUUID!
 
     override func setUp() {
         super.setUp()
-        dataStore = PlayerManagerTestUserDefaults()
-        testObject = DicePlayerManager(dataStore: dataStore)
+        dataStore = TestUserDefaults()
+        uniqueIdentifier = PlayerManagerTestUUID()
+        testObject = DicePlayerManager(dataStore: dataStore, uniqueIdentifier: uniqueIdentifier)
     }
 
     override func tearDown() {
         dataStore = nil
+        uniqueIdentifier = nil
         testObject = nil
 
         super.tearDown()
@@ -36,7 +39,7 @@ class PlayerManagerTests: XCTestCase {
      */
     func testAddPlayerWhileNoOtherPlayersExists() {
         testObject.addPlayer(name: "Linda", avatar: Data(capacity: 1))
-        let expectedPlayer = Player(id: 1, name: "Linda", avatar: Data(capacity: 1))
+        let expectedPlayer = Player(id: uniqueIdentifier.uuidString, name: "Linda", avatar: Data(capacity: 1))
         let expectedPlayerList = [expectedPlayer]
 
         XCTAssertTrue(dataStore.objectForKeyCalled)
@@ -52,14 +55,45 @@ class PlayerManagerTests: XCTestCase {
      *  And:  The player gets next available ID
      */
     func testAddPlayerWhileOtherPlayersExists() {
-        let expectedPlayer1 = Player(id: 1, name: "Linda", avatar: Data(capacity: 1))
-        let expectedPlayer2 = Player(id: 2, name: "Yaser", avatar: Data(capacity: 1))
+        let expectedPlayer1 = Player(id: "a", name: "Linda", avatar: Data(capacity: 1))
+        let expectedPlayer2 = Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))
         var expectedPlayerList = [expectedPlayer1, expectedPlayer2]
         dataStore.value = expectedPlayerList
 
         testObject.addPlayer(name: "Pixel", avatar: Data(capacity: 1))
-        let expectedPlayer3 = Player(id: 3, name: "Pixel", avatar: Data(capacity: 1))
+        let expectedPlayer3 = Player(id: uniqueIdentifier.uuidString, name: "Pixel", avatar: Data(capacity: 1))
         expectedPlayerList.append(expectedPlayer3)
+
+        XCTAssertTrue(dataStore.objectForKeyCalled)
+        XCTAssertTrue(dataStore.setValueForKeyCalled)
+        XCTAssertEqual(dataStore.key, "Players")
+        XCTAssertEqual(dataStore.value as! [Player], expectedPlayerList)
+    }
+
+    /**
+     *  Given: Previous players exists in storage
+     *  When: Players have been removed
+     *  And: A new player is added
+     *  Then: The added player is appended to the list
+     *  And:  The player gets next available ID
+     */
+    func testAddPlayerWhileOtherPlayersExistsAndSomePlayersHaveBeenRemoved() {
+        let expectedPlayer1 = Player(id: "a", name: "Linda", avatar: Data(capacity: 1))
+        let expectedPlayer2 = Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))
+        let expectedPlayer3 = Player(id: "c", name: "Pixel", avatar: Data(capacity: 1))
+        var expectedPlayerList = [expectedPlayer1, expectedPlayer2, expectedPlayer3]
+        dataStore.value = expectedPlayerList
+
+        guard let _ = try? testObject.removePlayer(expectedPlayer2) else {
+            XCTFail("Error thrown")
+            return
+        }
+
+        expectedPlayerList.remove(at: 1)
+
+        testObject.addPlayer(name: "Peppen", avatar: Data(capacity: 1))
+        let expectedPlayer4 = Player(id: uniqueIdentifier.uuidString, name: "Peppen", avatar: Data(capacity: 1))
+        expectedPlayerList.append(expectedPlayer4)
 
         XCTAssertTrue(dataStore.objectForKeyCalled)
         XCTAssertTrue(dataStore.setValueForKeyCalled)
@@ -73,8 +107,8 @@ class PlayerManagerTests: XCTestCase {
      *  Then: The updated player gets updated
      */
     func testUpdatePlayer() {
-        let expectedPlayer1 = Player(id: 1, name: "Linda", avatar: Data(capacity: 1))
-        let expectedPlayer2 = Player(id: 2, name: "Yaser", avatar: Data(capacity: 1))
+        let expectedPlayer1 = Player(id: "a", name: "Linda", avatar: Data(capacity: 1))
+        let expectedPlayer2 = Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))
         let expectedPlayerList = [expectedPlayer1, expectedPlayer2]
         dataStore.value = expectedPlayerList
 
@@ -99,12 +133,12 @@ class PlayerManagerTests: XCTestCase {
      *  Then: The update function throws an error
      */
     func testUpdateNonExistingPlayer() {
-        let expectedPlayer1 = Player(id: 1, name: "Linda", avatar: Data(capacity: 1))
-        let expectedPlayer2 = Player(id: 2, name: "Yaser", avatar: Data(capacity: 1))
+        let expectedPlayer1 = Player(id: "a", name: "Linda", avatar: Data(capacity: 1))
+        let expectedPlayer2 = Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))
         let expectedPlayerList = [expectedPlayer1, expectedPlayer2]
         dataStore.value = expectedPlayerList
 
-        XCTAssertThrowsError(try testObject.updatePlayer(Player(id: 3, name: "Pixel", avatar: Data(capacity: 1)))) { (error) in
+        XCTAssertThrowsError(try testObject.updatePlayer(Player(id: "c", name: "Pixel", avatar: Data(capacity: 1)))) { (error) in
             XCTAssertEqual(error as? PlayerError, PlayerError.nonExistingPlayer)
         }
 
@@ -118,9 +152,9 @@ class PlayerManagerTests: XCTestCase {
      *  Then: A list of all players is returned
      */
     func testGetAllPlayers() {
-        let expectedPlayer1 = Player(id: 1, name: "Linda", avatar: Data(capacity: 1))
-        let expectedPlayer2 = Player(id: 2, name: "Yaser", avatar: Data(capacity: 1))
-        let expectedPlayer3 = Player(id: 3, name: "Pixel", avatar: Data(capacity: 1))
+        let expectedPlayer1 = Player(id: "a", name: "Linda", avatar: Data(capacity: 1))
+        let expectedPlayer2 = Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))
+        let expectedPlayer3 = Player(id: "c", name: "Pixel", avatar: Data(capacity: 1))
 
         let expectedPlayerList = [expectedPlayer1, expectedPlayer2, expectedPlayer3]
         dataStore.value = expectedPlayerList
@@ -151,8 +185,8 @@ class PlayerManagerTests: XCTestCase {
      *  Then: The player is removed from the list
      */
     func testRemovePlayer() {
-        let expectedPlayer1 = Player(id: 1, name: "Linda", avatar: Data(capacity: 1))
-        let expectedPlayer2 = Player(id: 2, name: "Yaser", avatar: Data(capacity: 1))
+        let expectedPlayer1 = Player(id: "a", name: "Linda", avatar: Data(capacity: 1))
+        let expectedPlayer2 = Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))
         var expectedPlayerList = [expectedPlayer1, expectedPlayer2]
         dataStore.value = expectedPlayerList
 
@@ -176,7 +210,7 @@ class PlayerManagerTests: XCTestCase {
      *  And: Nothing else should happen (no crash, no update)
      */
     func testRemovePlayerWhenNoPlayersExists() {
-        let expectedPlayer1 = Player(id: 1, name: "Linda", avatar: Data(capacity: 1))
+        let expectedPlayer1 = Player(id: "a", name: "Linda", avatar: Data(capacity: 1))
 
         XCTAssertThrowsError(try testObject.removePlayer(expectedPlayer1)) { (error) in
             XCTAssertEqual(error as? PlayerError, PlayerError.emptyPlayerList)
@@ -194,12 +228,12 @@ class PlayerManagerTests: XCTestCase {
      *  And: Nothing else should happen (no crash, no update)
      */
     func testRemoveNonExistingPlayer() {
-        let expectedPlayer1 = Player(id: 1, name: "Linda", avatar: Data(capacity: 1))
-        let expectedPlayer2 = Player(id: 2, name: "Yaser", avatar: Data(capacity: 1))
+        let expectedPlayer1 = Player(id: "a", name: "Linda", avatar: Data(capacity: 1))
+        let expectedPlayer2 = Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))
         let expectedPlayerList = [expectedPlayer1, expectedPlayer2]
         dataStore.value = expectedPlayerList
 
-        XCTAssertThrowsError(try testObject.removePlayer(Player(id: 3, name: "Pixel", avatar: Data(capacity: 1)))) { (error) in
+        XCTAssertThrowsError(try testObject.removePlayer(Player(id: "c", name: "Pixel", avatar: Data(capacity: 1)))) { (error) in
             XCTAssertEqual(error as? PlayerError, PlayerError.nonExistingPlayer)
         }
 
@@ -209,7 +243,7 @@ class PlayerManagerTests: XCTestCase {
 
 }
 
-class PlayerManagerTestUserDefaults: DataStore {
+class TestUserDefaults: DataStore {
     var setValueForKeyCalled = false
     var objectForKeyCalled = false
     var key: String?
@@ -225,5 +259,30 @@ class PlayerManagerTestUserDefaults: DataStore {
         objectForKeyCalled = true
         key = defaultName
         return value
+    }
+}
+
+class PlayerManagerTestUUID: UniqueIdentifier {
+    var uuidString: String = "123"
+}
+
+extension Player: Equatable {
+    public static func == (lhs: Player, rhs: Player) -> Bool {
+        return
+            lhs.id == rhs.id &&
+                lhs.name == rhs.name &&
+                lhs.avatar == rhs.avatar &&
+                lhs.currentGameData == rhs.currentGameData &&
+                lhs.bestTurn == rhs.bestTurn &&
+                lhs.quickestVictory == rhs.quickestVictory
+    }
+}
+
+extension CurrentGameData: Equatable {
+    public static func == (lhs: CurrentGameData, rhs: CurrentGameData) -> Bool {
+        return
+            lhs.lastTurnScore == rhs.lastTurnScore &&
+                lhs.totalScore == rhs.totalScore &&
+                lhs.turns == rhs.turns
     }
 }

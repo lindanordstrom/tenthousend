@@ -13,12 +13,3 @@ struct CurrentGameData {
     var turns: Int = 0
     var lastTurnScore: Int? 
 }
-
-extension CurrentGameData: Equatable {
-    public static func == (lhs: CurrentGameData, rhs: CurrentGameData) -> Bool {
-        return
-            lhs.lastTurnScore == rhs.lastTurnScore &&
-                lhs.totalScore == rhs.totalScore &&
-                lhs.turns == rhs.turns
-    }
-}
