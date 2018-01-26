@@ -8,9 +8,34 @@
 
 import Foundation
 
-protocol PlaerManager {
+protocol PlayerManager {
     func addPlayer(name: String, avatar: Data)
     func updatePlayer(_: Player, name: String, avatar: Data)
     func getAllPlayers() -> [Player]
     func removePlayer(_: Player)
+}
+
+class DicePlayerManager: PlayerManager {
+
+    let dataStore: DataStore
+
+    init(dataStore: DataStore = UserDefaults.standard) {
+        self.dataStore = dataStore
+    }
+
+    func addPlayer(name: String, avatar: Data) {
+
+    }
+
+    func updatePlayer(_: Player, name: String, avatar: Data) {
+
+    }
+
+    func getAllPlayers() -> [Player] {
+        return []
+    }
+
+    func removePlayer(_: Player) {
+
+    }
 }

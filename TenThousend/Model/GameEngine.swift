@@ -12,6 +12,7 @@ protocol GameEngine {
     func startGame(players: [Player]) -> Bool
     func updateGame(score: Int)
     func cancelGame()
+    func getAllGames() -> [Game]
     func add(observer: GameObserver)
     func remove(observer: GameObserver)
 }
@@ -20,6 +21,11 @@ protocol GameEngine {
 class DiceGameEngine: GameEngine {
     private var currentGame: Game?
     private var gameObservers: [GameObserver] = []
+    private let dataStore: DataStore
+
+    init(dataStore: DataStore = UserDefaults.standard) {
+        self.dataStore = dataStore
+    }
 
     func startGame(players: [Player]) -> Bool {
         guard !players.isEmpty,
@@ -52,6 +58,10 @@ class DiceGameEngine: GameEngine {
         currentGame?.gameStatus = .cancelled
         currentGame?.activePlayer = nil
         updateGameObservers()
+    }
+
+    func getAllGames() -> [Game] {
+        return []
     }
 
     func add(observer: GameObserver) {
