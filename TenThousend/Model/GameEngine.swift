@@ -17,11 +17,11 @@ protocol GameEngine {
     func remove(observer: GameObserver)
 }
 
-private struct GameEngineStrings {
-    static let gamesKey = "Games"
-}
-
 class DiceGameEngine: GameEngine {
+    private enum DataStoreKeys: String {
+        case games = "Games"
+    }
+
     private var currentGame: Game?
     private var gameObservers: [GameObserver] = []
     private let dataStore: DataStore
@@ -39,14 +39,13 @@ class DiceGameEngine: GameEngine {
             currentGame == nil
             else { return false }
 
-        currentGame = Game(id: 1, date: NSDate(), target: 10000, participants: players, gameStatus: .ongoing)
+        let game = Game(id: 1, date: NSDate(), target: 10000, participants: players, gameStatus: .ongoing)
 
-        if let game = currentGame {
-            var allGames = getAllGames()
-            allGames.append(game)
-            dataStore.setValue(allGames, forKey: GameEngineStrings.gamesKey)
-        }
+        var allGames = getAllGames()
+        allGames.append(game)
+        dataStore.setValue(allGames, forKey: DataStoreKeys.games.rawValue)
 
+        currentGame = game
         updateGameObservers()
         return true
     }
@@ -75,10 +74,8 @@ class DiceGameEngine: GameEngine {
     }
 
     func getAllGames() -> [Game] {
-        guard let games = dataStore.object(forKey: GameEngineStrings.gamesKey) as? [Game] else {
-            return []
-        }
-        return games
+        let games = dataStore.object(forKey: DataStoreKeys.games.rawValue) as? [Game]
+        return games ?? []
     }
 
     func add(observer: GameObserver) {
@@ -106,7 +103,7 @@ class DiceGameEngine: GameEngine {
         let matchingIndex = game.participants.index(where: { $0.id == activePlayer.id })
         
         if let i = matchingIndex {
-            let nextIndex = i + 1 >= game.participants.count ? 0 : i + 1
+            let nextIndex = (i + 1) % game.participants.count
             currentGame?.activePlayer = currentGame?.participants[nextIndex]
         }
     }

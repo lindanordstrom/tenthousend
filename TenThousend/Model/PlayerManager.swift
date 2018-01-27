@@ -20,11 +20,11 @@ enum PlayerError: Error {
     case emptyPlayerList
 }
 
-private struct PlayerStrings {
-    static let playersKey = "Players"
-}
-
 class DicePlayerManager: PlayerManager {
+
+    private enum DataStoreKeys: String {
+        case players = "Players"
+    }
 
     private let dataStore: DataStore
     private let uniqueIdentifier: UniqueIdentifier
@@ -52,10 +52,8 @@ class DicePlayerManager: PlayerManager {
     }
 
     func getAllPlayers() -> [Player] {
-        guard let players = dataStore.object(forKey: PlayerStrings.playersKey) as? [Player] else {
-            return []
-        }
-        return players
+        let players = dataStore.object(forKey: DataStoreKeys.players.rawValue) as? [Player]
+        return players ?? []
     }
 
     func removePlayer(_ player: Player) throws {
@@ -66,7 +64,7 @@ class DicePlayerManager: PlayerManager {
     }
 
     private func updateCurrentPlayers(_ players: [Player]) {
-        dataStore.setValue(players, forKey: PlayerStrings.playersKey)
+        dataStore.setValue(players, forKey: DataStoreKeys.players.rawValue)
     }
 
     private func getPlayerIndex(_ players: [Player], player: Player) throws -> Int {
