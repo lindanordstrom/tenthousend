@@ -269,7 +269,6 @@ class PlayerManagerTestUUID: UniqueIdentifier {
 extension Player: Equatable {
     public static func == (lhs: Player, rhs: Player) -> Bool {
         return
-            lhs.id == rhs.id &&
                 lhs.name == rhs.name &&
                 lhs.avatar == rhs.avatar &&
                 lhs.currentGameData == rhs.currentGameData &&

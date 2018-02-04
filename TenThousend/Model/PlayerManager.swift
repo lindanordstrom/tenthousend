@@ -9,7 +9,7 @@
 import Foundation
 
 protocol PlayerManager {
-    func addPlayer(name: String, avatar: Data)
+    func addPlayer(name: String, avatar: Data) -> Player
     func updatePlayer(_: Player) throws
     func getAllPlayers() -> [Player]
     func removePlayer(_: Player) throws
@@ -37,11 +37,12 @@ class DicePlayerManager: PlayerManager {
         self.uniqueIdentifier = uniqueIdentifier
     }
 
-    func addPlayer(name: String, avatar: Data) {
+    func addPlayer(name: String, avatar: Data) -> Player {
         var currentPlayers = getAllPlayers()
         let newPlayer = Player(id: uniqueIdentifier.uuidString, name: name, avatar: avatar)
         currentPlayers.append(newPlayer)
         updateCurrentPlayers(currentPlayers)
+        return newPlayer
     }
 
     func updatePlayer(_ player: Player) throws {
@@ -52,8 +53,11 @@ class DicePlayerManager: PlayerManager {
     }
 
     func getAllPlayers() -> [Player] {
-        let players = dataStore.object(forKey: DataStoreKeys.players.rawValue) as? [Player]
-        return players ?? []
+        if let unarchivedObject = dataStore.object(forKey: DataStoreKeys.players.rawValue) as? Data {
+            return NSKeyedUnarchiver.unarchiveObject(with: unarchivedObject as Data) as? [Player] ?? []
+        } else {
+            return []
+        }
     }
 
     func removePlayer(_ player: Player) throws {
@@ -64,7 +68,8 @@ class DicePlayerManager: PlayerManager {
     }
 
     private func updateCurrentPlayers(_ players: [Player]) {
-        dataStore.setValue(players, forKey: DataStoreKeys.players.rawValue)
+        let archivedObject = archivePlayers(players)
+        dataStore.setValue(archivedObject, forKey: DataStoreKeys.players.rawValue)
     }
 
     private func getPlayerIndex(_ players: [Player], player: Player) throws -> Int {
@@ -77,4 +82,16 @@ class DicePlayerManager: PlayerManager {
         }
         return i
     }
+
+
+
+
+
+    private func archivePlayers(_ people:[Player]) -> NSData {
+        return NSKeyedArchiver.archivedData(withRootObject: people as NSArray) as NSData
+    }
+
+    private let UserDefaultsPeopleKey = "peoplekey"
+
+
 }
