@@ -310,11 +310,19 @@ class GameEngineTests: XCTestCase {
 extension GameEngineTests {
     func assertGamesAreEqual(testGame: Game?, expectedGame: Game) {
         XCTAssertNotNil(testGame)
-        XCTAssertEqual(testGame?.gameStatus, expectedGame.gameStatus)
-        XCTAssertEqual(testGame!.participants, expectedGame.participants)
-        XCTAssertEqual(testGame?.target, expectedGame.target)
-        XCTAssertEqual(testGame?.winnner, expectedGame.winnner)
-        XCTAssertEqual(testGame?.activePlayer, expectedGame.activePlayer)
+        guard let testGame = testGame else {
+            return
+        }
+ 
+        XCTAssertEqual(testGame.gameStatus, expectedGame.gameStatus)
+
+        let testPlayers = testGame.participants.map({return $0.id})
+        let expectedPlayers = expectedGame.participants.map({return $0.id})
+        XCTAssertEqual(testPlayers, expectedPlayers)
+
+        XCTAssertEqual(testGame.target, expectedGame.target)
+        XCTAssertEqual(testGame.winnner?.id, expectedGame.winnner?.id)
+        XCTAssertEqual(testGame.activePlayer?.id, expectedGame.activePlayer?.id)
     }
 }
 

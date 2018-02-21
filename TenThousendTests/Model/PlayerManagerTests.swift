@@ -45,7 +45,9 @@ class PlayerManagerTests: XCTestCase {
         XCTAssertTrue(dataStore.objectForKeyCalled)
         XCTAssertTrue(dataStore.setValueForKeyCalled)
         XCTAssertEqual(dataStore.key, "Players")
-        XCTAssertEqual(dataStore.value as! [Player], expectedPlayerList)
+        let unarchivedObject = NSKeyedUnarchiver.unarchiveObject(with: dataStore.value as! Data) as? [Player] ?? []
+        XCTAssertEqual(unarchivedObject.count, expectedPlayerList.count)
+        XCTAssertEqual(unarchivedObject.last?.id, expectedPlayerList.last?.id)
     }
 
     /**
@@ -58,7 +60,7 @@ class PlayerManagerTests: XCTestCase {
         let expectedPlayer1 = Player(id: "a", name: "Linda", avatar: Data(capacity: 1))
         let expectedPlayer2 = Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))
         var expectedPlayerList = [expectedPlayer1, expectedPlayer2]
-        dataStore.value = expectedPlayerList
+        dataStore.value = NSKeyedArchiver.archivedData(withRootObject: expectedPlayerList as NSArray) as NSData
 
         testObject.addPlayer(name: "Pixel", avatar: Data(capacity: 1))
         let expectedPlayer3 = Player(id: uniqueIdentifier.uuidString, name: "Pixel", avatar: Data(capacity: 1))
@@ -67,7 +69,9 @@ class PlayerManagerTests: XCTestCase {
         XCTAssertTrue(dataStore.objectForKeyCalled)
         XCTAssertTrue(dataStore.setValueForKeyCalled)
         XCTAssertEqual(dataStore.key, "Players")
-        XCTAssertEqual(dataStore.value as! [Player], expectedPlayerList)
+        let unarchivedObject = NSKeyedUnarchiver.unarchiveObject(with: dataStore.value as! Data) as? [Player] ?? []
+        XCTAssertEqual(unarchivedObject.count, expectedPlayerList.count)
+        XCTAssertEqual(unarchivedObject.last?.id, expectedPlayerList.last?.id)
     }
 
     /**
@@ -82,7 +86,7 @@ class PlayerManagerTests: XCTestCase {
         let expectedPlayer2 = Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))
         let expectedPlayer3 = Player(id: "c", name: "Pixel", avatar: Data(capacity: 1))
         var expectedPlayerList = [expectedPlayer1, expectedPlayer2, expectedPlayer3]
-        dataStore.value = expectedPlayerList
+        dataStore.value = NSKeyedArchiver.archivedData(withRootObject: expectedPlayerList as NSArray) as NSData
 
         guard let _ = try? testObject.removePlayer(expectedPlayer2) else {
             XCTFail("Error thrown")
@@ -98,7 +102,9 @@ class PlayerManagerTests: XCTestCase {
         XCTAssertTrue(dataStore.objectForKeyCalled)
         XCTAssertTrue(dataStore.setValueForKeyCalled)
         XCTAssertEqual(dataStore.key, "Players")
-        XCTAssertEqual(dataStore.value as! [Player], expectedPlayerList)
+        let unarchivedObject = NSKeyedUnarchiver.unarchiveObject(with: dataStore.value as! Data) as? [Player] ?? []
+        XCTAssertEqual(unarchivedObject.count, expectedPlayerList.count)
+        XCTAssertEqual(unarchivedObject.last?.id, expectedPlayerList.last?.id)
     }
 
     /**
@@ -110,7 +116,7 @@ class PlayerManagerTests: XCTestCase {
         let expectedPlayer1 = Player(id: "a", name: "Linda", avatar: Data(capacity: 1))
         let expectedPlayer2 = Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))
         let expectedPlayerList = [expectedPlayer1, expectedPlayer2]
-        dataStore.value = expectedPlayerList
+        dataStore.value = NSKeyedArchiver.archivedData(withRootObject: expectedPlayerList as NSArray) as NSData
 
         expectedPlayer1.name = "Linda is Awesome"
         expectedPlayer1.bestTurn = 5000
@@ -124,7 +130,11 @@ class PlayerManagerTests: XCTestCase {
         XCTAssertTrue(dataStore.objectForKeyCalled)
         XCTAssertTrue(dataStore.setValueForKeyCalled)
         XCTAssertEqual(dataStore.key, "Players")
-        XCTAssertEqual(dataStore.value as! [Player], expectedPlayerList)
+        let unarchivedObject = NSKeyedUnarchiver.unarchiveObject(with: dataStore.value as! Data) as? [Player] ?? []
+        XCTAssertEqual(unarchivedObject.count, expectedPlayerList.count)
+        XCTAssertEqual(unarchivedObject.first?.name, expectedPlayerList.first?.name)
+        XCTAssertEqual(unarchivedObject.first?.bestTurn, expectedPlayerList.first?.bestTurn)
+        XCTAssertEqual(unarchivedObject.first?.currentGameData.totalScore, expectedPlayerList.first?.currentGameData.totalScore)
     }
 
     /**
@@ -136,7 +146,7 @@ class PlayerManagerTests: XCTestCase {
         let expectedPlayer1 = Player(id: "a", name: "Linda", avatar: Data(capacity: 1))
         let expectedPlayer2 = Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))
         let expectedPlayerList = [expectedPlayer1, expectedPlayer2]
-        dataStore.value = expectedPlayerList
+        dataStore.value = NSKeyedArchiver.archivedData(withRootObject: expectedPlayerList as NSArray) as NSData
 
         XCTAssertThrowsError(try testObject.updatePlayer(Player(id: "c", name: "Pixel", avatar: Data(capacity: 1)))) { (error) in
             XCTAssertEqual(error as? PlayerError, PlayerError.nonExistingPlayer)
@@ -157,13 +167,14 @@ class PlayerManagerTests: XCTestCase {
         let expectedPlayer3 = Player(id: "c", name: "Pixel", avatar: Data(capacity: 1))
 
         let expectedPlayerList = [expectedPlayer1, expectedPlayer2, expectedPlayer3]
-        dataStore.value = expectedPlayerList
+        dataStore.value = NSKeyedArchiver.archivedData(withRootObject: expectedPlayerList as NSArray) as NSData
 
         let result = testObject.getAllPlayers()
 
         XCTAssertTrue(dataStore.objectForKeyCalled)
         XCTAssertEqual(dataStore.key, "Players")
-        XCTAssertEqual(result, expectedPlayerList)
+        XCTAssertEqual(result.count, expectedPlayerList.count)
+        XCTAssertEqual(result.last?.id, expectedPlayerList.last?.id)
     }
 
     /**
@@ -188,7 +199,7 @@ class PlayerManagerTests: XCTestCase {
         let expectedPlayer1 = Player(id: "a", name: "Linda", avatar: Data(capacity: 1))
         let expectedPlayer2 = Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))
         var expectedPlayerList = [expectedPlayer1, expectedPlayer2]
-        dataStore.value = expectedPlayerList
+        dataStore.value = NSKeyedArchiver.archivedData(withRootObject: expectedPlayerList as NSArray) as NSData
 
         guard let _ = try? testObject.removePlayer(expectedPlayer1) else {
             XCTFail("Error thrown")
@@ -200,7 +211,9 @@ class PlayerManagerTests: XCTestCase {
         XCTAssertTrue(dataStore.objectForKeyCalled)
         XCTAssertTrue(dataStore.setValueForKeyCalled)
         XCTAssertEqual(dataStore.key, "Players")
-        XCTAssertEqual(dataStore.value as! [Player], expectedPlayerList)
+        let unarchivedObject = NSKeyedUnarchiver.unarchiveObject(with: dataStore.value as! Data) as? [Player] ?? []
+        XCTAssertEqual(unarchivedObject.count, expectedPlayerList.count)
+        XCTAssertEqual(unarchivedObject.last?.id, expectedPlayerList.last?.id)
     }
 
     /**
@@ -231,7 +244,7 @@ class PlayerManagerTests: XCTestCase {
         let expectedPlayer1 = Player(id: "a", name: "Linda", avatar: Data(capacity: 1))
         let expectedPlayer2 = Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))
         let expectedPlayerList = [expectedPlayer1, expectedPlayer2]
-        dataStore.value = expectedPlayerList
+        dataStore.value = NSKeyedArchiver.archivedData(withRootObject: expectedPlayerList as NSArray) as NSData
 
         XCTAssertThrowsError(try testObject.removePlayer(Player(id: "c", name: "Pixel", avatar: Data(capacity: 1)))) { (error) in
             XCTAssertEqual(error as? PlayerError, PlayerError.nonExistingPlayer)

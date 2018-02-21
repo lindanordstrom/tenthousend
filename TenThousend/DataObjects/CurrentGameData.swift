@@ -9,8 +9,8 @@
 import Foundation
 
 class CurrentGameData: NSObject, NSCoding {
-    var totalScore: Int = 0
-    var turns: Int = 0
+    var totalScore: Int
+    var turns: Int
     var lastTurnScore: Int?
 
     public func encode(with aCoder: NSCoder) {
@@ -22,6 +22,7 @@ class CurrentGameData: NSObject, NSCoding {
     override init() {
         totalScore = 0
         turns = 0
+        super.init()
     }
 
     init(totalScore: Int, turns: Int, lastTurnScore: Int?) {
@@ -31,8 +32,8 @@ class CurrentGameData: NSObject, NSCoding {
     }
 
     required public init?(coder aDecoder: NSCoder) {
-        totalScore = aDecoder.decodeObject(forKey: "totalScore") as? Int ?? 0
-        turns = aDecoder.decodeObject(forKey: "turns") as? Int ?? 0
+        totalScore = aDecoder.decodeInteger(forKey: "totalScore")
+        turns = aDecoder.decodeInteger(forKey: "turns")
         lastTurnScore = aDecoder.decodeObject(forKey: "lastTurnScore") as? Int
     }
 }
