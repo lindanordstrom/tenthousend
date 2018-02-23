@@ -12,7 +12,7 @@ import XCTest
 
 class GameEngineTests: XCTestCase {
 
-    private var testObject: DiceGameEngine!
+    private var testObject: GameEngine!
     private var testObserver: TestObserver!
     private var dataStore: TestUserDefaults!
     private var testPlayers = [Player(id: "a", name: "Linda", avatar: Data(capacity: 1)), Player(id: "b", name: "Yaser", avatar: Data(capacity: 1))]

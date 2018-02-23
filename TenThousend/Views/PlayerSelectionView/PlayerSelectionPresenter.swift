@@ -21,10 +21,14 @@ class PlayerSelectionPresenter: PlayerSelectionViewPresenter {
     private let ui: PlayerSelectionUI
     private let closure: ([Player]?)->Void
     private var players: [Player]?
+    private let dataStore: DataStore
+    private let uniqueIdentifier: UniqueIdentifier
 
-    init(ui: PlayerSelectionUI, closure: @escaping ([Player]?)->Void ) {
+    init(ui: PlayerSelectionUI, dataStore: DataStore = UserDefaults.standard, uniqueIdentifier: UniqueIdentifier = UUID(), closure: @escaping ([Player]?)->Void) {
         self.ui = ui
         self.closure = closure
+        self.dataStore = dataStore
+        self.uniqueIdentifier = uniqueIdentifier
         reloadPlayers()
     }
 
@@ -35,7 +39,7 @@ class PlayerSelectionPresenter: PlayerSelectionViewPresenter {
     func numbersOfPlayers() -> Int {
         reloadPlayers()
         guard let players = players else {
-            return 0
+            return 1
         }
         return players.count + 1
     }
@@ -52,6 +56,7 @@ class PlayerSelectionPresenter: PlayerSelectionViewPresenter {
     }
 
     func select(item: Any?, at index: Int) {
+        reloadPlayers()
         guard let players = players else { return }
         if index < players.count {
             ui.select(cell: item)
@@ -61,7 +66,7 @@ class PlayerSelectionPresenter: PlayerSelectionViewPresenter {
     }
 
     private func reloadPlayers() {
-        players = DicePlayerManager().getAllPlayers()
+        players = DicePlayerManager(dataStore: dataStore, uniqueIdentifier: uniqueIdentifier).getAllPlayers()
     }
 }
 

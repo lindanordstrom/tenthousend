@@ -12,7 +12,7 @@ import XCTest
 
 class PlayerManagerTests: XCTestCase {
 
-    private var testObject: DicePlayerManager!
+    private var testObject: PlayerManager!
     private var dataStore: TestUserDefaults!
     private var uniqueIdentifier: PlayerManagerTestUUID!
 
