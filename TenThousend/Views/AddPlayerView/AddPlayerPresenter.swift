@@ -17,11 +17,12 @@ protocol AddPlayerViewPresenter {
 class AddPlayerPresenter: AddPlayerViewPresenter {
 
     private let ui: AddPlayerUI
-    private let playerManager = DicePlayerManager()
+    private let playerManager: PlayerManager
     private let closure: (Player?)->Void
 
-    init(ui: AddPlayerUI, closure: @escaping (Player?)->Void ) {
+    init(ui: AddPlayerUI, playerManager: PlayerManager = DicePlayerManager(), closure: @escaping (Player?)->Void ) {
         self.ui = ui
+        self.playerManager = playerManager
         self.closure = closure
     }
 

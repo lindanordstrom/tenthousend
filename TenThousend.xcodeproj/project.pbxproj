@@ -36,6 +36,7 @@
 		43A08A1F2009F92B00D03C08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43A08A1B2009F92B00D03C08 /* Assets.xcassets */; };
 		43A08A21200A024400D03C08 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43A08A20200A024400D03C08 /* Default-568h@2x.png */; };
 		43A5C5C3203F8959005668F2 /* PlayerSelectionPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A5C5C2203F8959005668F2 /* PlayerSelectionPresenterTests.swift */; };
+		43A5C5C5203F993C005668F2 /* AddPlayerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A5C5C4203F993C005668F2 /* AddPlayerViewTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		43A08A1B2009F92B00D03C08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		43A08A20200A024400D03C08 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		43A5C5C2203F8959005668F2 /* PlayerSelectionPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelectionPresenterTests.swift; sourceTree = "<group>"; };
+		43A5C5C4203F993C005668F2 /* AddPlayerViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerViewTests.swift; sourceTree = "<group>"; };
 		43B8A2052007CFDD0060821C /* TenThousend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TenThousend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43B8A2192007CFDD0060821C /* TenThousendTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TenThousendTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43B8A21F2007CFDD0060821C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 		43A5C5C0203F88E5005668F2 /* AddPlayerView */ = {
 			isa = PBXGroup;
 			children = (
+				43A5C5C4203F993C005668F2 /* AddPlayerViewTests.swift */,
 			);
 			path = AddPlayerView;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				43A5C5C3203F8959005668F2 /* PlayerSelectionPresenterTests.swift in Sources */,
 				43668C5F201AF79900A3457C /* PlayerManagerTests.swift in Sources */,
 				43A08A142009F8C000D03C08 /* GameEngineTests.swift in Sources */,
+				43A5C5C5203F993C005668F2 /* AddPlayerViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
