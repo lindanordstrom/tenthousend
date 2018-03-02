@@ -2,7 +2,7 @@
 //  MainPageViewController.swift
 //  TenThousend
 //
-//  Created by Yaser on 2018-01-27.
+//  Created by Linda on 2018-01-27.
 //  Copyright © 2018 YasLin. All rights reserved.
 //
 

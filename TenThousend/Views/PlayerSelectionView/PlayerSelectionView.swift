@@ -2,7 +2,7 @@
 //  PlayerSelectionView.swift
 //  TenThousend
 //
-//  Created by Yaser on 2018-02-03.
+//  Created by Linda on 2018-02-03.
 //  Copyright © 2018 YasLin. All rights reserved.
 //
 

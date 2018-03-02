@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  TenThousand
 //
-//  Created by Yaser on 2018-01-09.
+//  Created by Linda on 2018-01-09.
 //  Copyright © 2018 YasLin. All rights reserved.
 //
 
