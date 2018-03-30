@@ -8,14 +8,7 @@
 
 import Foundation
 
-protocol StartGameViewPresenter {
-    func startGame()
-    func addToGame(player: Player)
-    func removeFromGame(player: Player)
-    func createNewPlayer()
-}
-
-class StartGamePresenter: StartGameViewPresenter {
+class StartGamePresenter {
 
     private let ui: StartGameUI
     private var gameEngine: AnyObject?

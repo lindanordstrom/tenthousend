@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AddPlayerUI {
-    func showError(title: String, message: String, buttonTitle: String)
+    func showErrorMissingDetailsError()
 }
 
 class AddPlayerView: UIView, AddPlayerUI {
@@ -29,9 +29,7 @@ class AddPlayerView: UIView, AddPlayerUI {
         presenter?.dismissView()
     }
 
-    func showError(title: String, message: String, buttonTitle: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: buttonTitle, style: UIAlertActionStyle.default, handler: nil))
-        self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+    func showErrorMissingDetailsError() {
+        AlertHandler.showError(viewController: self.window?.rootViewController, title: "Missing Name", message: "You need to enter a name", buttonTitle: "OK")
     }
 }

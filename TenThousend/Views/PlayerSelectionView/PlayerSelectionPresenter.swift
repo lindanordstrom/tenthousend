@@ -9,20 +9,14 @@
 import Foundation
 import UIKit
 
-protocol PlayerSelectionViewPresenter {
-    func dismissView()
-    func numbersOfPlayers() -> Int
-    func formatCell(at index: Int, playerCellClosure: (Player)->Void, createNewPlayerCellClosure: ()->Void)
-    func select(item: Any?, at index: Int)
-}
-
-class PlayerSelectionPresenter: PlayerSelectionViewPresenter {
+class PlayerSelectionPresenter {
 
     private let ui: PlayerSelectionUI
     private let closure: ([Player]?)->Void
     private var players: [Player]?
     private let dataStore: DataStore
     private let uniqueIdentifier: UniqueIdentifier
+    private var selectedPlayers: [Player] = []
 
     init(ui: PlayerSelectionUI, dataStore: DataStore = UserDefaults.standard, uniqueIdentifier: UniqueIdentifier = UUID(), closure: @escaping ([Player]?)->Void) {
         self.ui = ui
@@ -34,6 +28,11 @@ class PlayerSelectionPresenter: PlayerSelectionViewPresenter {
 
     func dismissView() {
         closure(nil)
+    }
+
+    func dismissViewWithSelectedPlayers() {
+        // TODO add check if at least two players has been added
+        closure(selectedPlayers)
     }
 
     func numbersOfPlayers() -> Int {
@@ -59,9 +58,21 @@ class PlayerSelectionPresenter: PlayerSelectionViewPresenter {
         reloadPlayers()
         guard let players = players else { return }
         if index < players.count {
+            selectedPlayers.append(players[index])
             ui.select(cell: item)
+        } else if players.count >= 10 {
+            ui.showMaxUsersError()
         } else {
             ui.showAddPlayerView()
+        }
+    }
+
+    func deselect(item: Any?, at index: Int) {
+        reloadPlayers()
+        guard let players = players else { return }
+        if index < players.count {
+            selectedPlayers = selectedPlayers.filter { $0.id != players[index].id }
+            ui.deselect(cell: item)
         }
     }
 

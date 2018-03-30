@@ -10,7 +10,9 @@ import UIKit
 
 protocol PlayerSelectionUI {
     func select(cell: Any?)
+    func deselect(cell: Any?)
     func showAddPlayerView()
+    func showMaxUsersError()
 }
 
 class PlayerSelectionView: UIView, PlayerSelectionUI {
@@ -19,7 +21,7 @@ class PlayerSelectionView: UIView, PlayerSelectionUI {
     @IBOutlet private var playersCollectionView: UICollectionView?
 
     private let cellIdentifier = "playerCell"
-    private var presenter: PlayerSelectionViewPresenter?
+    private var presenter: PlayerSelectionPresenter?
 
     override func awakeFromNib() {
         playersCollectionView?.register(UINib(nibName:"PlayerCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
@@ -34,16 +36,18 @@ class PlayerSelectionView: UIView, PlayerSelectionUI {
         presenter?.dismissView()
     }
 
+    @IBAction func doneButton(_ sender: Any) {
+        presenter?.dismissViewWithSelectedPlayers()
+    }
+
     func select(cell: Any?) {
         guard let cell = cell as? PlayerCell else { return }
-        print("You selected \(cell.name?.text ?? "")")
         cell.layer.borderWidth = 2.0
         cell.layer.borderColor = #colorLiteral(red: 0, green: 0.9406109452, blue: 0, alpha: 1)
     }
 
     func deselect(cell: Any?) {
         guard let cell = cell as? PlayerCell else { return }
-        print("You deselected \(cell.name?.text ?? "")")
         cell.layer.borderWidth = 0
     }
 
@@ -58,6 +62,10 @@ class PlayerSelectionView: UIView, PlayerSelectionUI {
             contentView.removeFromSuperview()
         }
         view?.addSubview(contentView)
+    }
+
+    func showMaxUsersError() {
+        AlertHandler.showError(viewController: self.window?.rootViewController, title: "Max 10 players", message: "You cannot add more than 10 players", buttonTitle: "OK")
     }
 }
 
@@ -89,6 +97,6 @@ extension PlayerSelectionView: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        deselect(cell: cell)
+        presenter?.deselect(item: cell, at: indexPath.item)
     }
 }

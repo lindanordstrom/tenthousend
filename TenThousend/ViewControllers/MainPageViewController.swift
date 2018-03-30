@@ -14,7 +14,7 @@ protocol StartGameUI {
 
 class MainPageViewController: UIViewController, StartGameUI {
 
-    private var presenter: StartGameViewPresenter?
+    private var presenter: StartGamePresenter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,14 +22,7 @@ class MainPageViewController: UIViewController, StartGameUI {
     }
 
     @IBAction func StartGameButton(_ sender: UIButton) {
-        guard let views = Bundle.main.loadNibNamed("PlayerSelectionView", owner: nil, options: nil) as? [UIView],
-            let contentView = views.first as? PlayerSelectionView else {
-            return
-        }
-        contentView.configure {_ in
-            contentView.removeFromSuperview()
-        }
-        view.addSubview(contentView)
+        showPlayerSelection()
     }
 
     func showOngoing(game: Game) {
@@ -37,14 +30,19 @@ class MainPageViewController: UIViewController, StartGameUI {
         //navigationController?.pushViewController(next, animated: true)
     }
 
-    func showAddPlayer() {
-        // Remove select player view
-        // Show add player view
-    }
-
-    func newPlayerAdded() {
-        // Remove add player view
-        // Show select player view
+    private func showPlayerSelection() {
+        guard let views = Bundle.main.loadNibNamed("PlayerSelectionView", owner: nil, options: nil) as? [UIView],
+            let playerSelectionView = views.first as? PlayerSelectionView else {
+                return
+        }
+        playerSelectionView.configure { selectedPlayers in
+            defer { playerSelectionView.removeFromSuperview() }
+            guard let selectedPlayers = selectedPlayers else { return }
+            for player in selectedPlayers {
+                print(player.name)
+            }
+        }
+        view.addSubview(playerSelectionView)
     }
 
     /*

@@ -9,12 +9,7 @@
 import Foundation
 import UIKit
 
-protocol AddPlayerViewPresenter {
-    func createNewPlayer(name: String?)
-    func dismissView()
-}
-
-class AddPlayerPresenter: AddPlayerViewPresenter {
+class AddPlayerPresenter {
 
     private let ui: AddPlayerUI
     private let playerManager: PlayerManager
@@ -28,7 +23,7 @@ class AddPlayerPresenter: AddPlayerViewPresenter {
 
     func createNewPlayer(name: String?) {
         guard let name = name, !name.isEmpty else {
-            ui.showError(title: "Missing Name", message: "You need to enter a name", buttonTitle: "OK")
+            ui.showErrorMissingDetailsError()
             return
         }
         let player = playerManager.addPlayer(name: name, avatar: Data())
